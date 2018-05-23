@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+.nyc_output/
+coverage/
+src-cov
+
+node_modules/
+/bootstrap/
+.bundle/
+vendor/
+
+# Vim generated files
+*.swp
+*.swo
