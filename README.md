@@ -1,4 +1,4 @@
-# Bootlint
+# Bootlint-Customization
 
 [![NPM version](https://img.shields.io/npm/v/bootlint.svg)](https://www.npmjs.com/package/bootlint)
 [![Build Status](https://img.shields.io/travis/twbs/bootlint/master.svg)](https://travis-ci.org/twbs/bootlint)
@@ -8,53 +8,57 @@
 [![Dependency Status](https://img.shields.io/david/twbs/bootlint.svg)](https://david-dm.org/twbs/bootlint)
 [![devDependency Status](https://img.shields.io/david/dev/twbs/bootlint.svg)](https://david-dm.org/twbs/bootlint?type=dev)
 
-An HTML [linter](https://en.wikipedia.org/wiki/Lint_%28software%29) for [Bootstrap](https://getbootstrap.com/) projects
+为[Bootstrap](https://getbootstrap.com/)项目开发的一个HTML的[linter](https://en.wikipedia.org/wiki/Lint_%28software%29)
 
-## What's Bootlint?
+## 什么是 Bootlint-Customization?
 
-Bootlint is a tool that checks for several common HTML mistakes in webpages that are using [Bootstrap](https://getbootstrap.com/) in a fairly "vanilla" way. Vanilla Bootstrap's components/widgets require their parts of the DOM to conform to certain structures. Bootlint checks that instances of Bootstrap components have correctly-structured HTML. Optimal usage of Bootstrap also requires that your pages include certain `<meta>` tags, an HTML5 doctype declaration, etc.; Bootlint checks that these are present.
+Bootlint-Customization是在Bootlint的基础上做了一些定制的开发，因为我们队Bootstrap的组件进行了一些增加，因此官方的Bootlint对新增的结构不可能支持的，所以我们只能自己动手做一些调整了，再次，非常感谢Bootstrap团队和Bootlint团队的辛勤工作。
 
-### Caveats
+## 什么是 Bootlint?
 
-Bootlint assumes that your webpage is already valid HTML5. If you need to check HTML5 validity, we recommend tools like [`vnu.jar`](https://validator.github.io/validator/), [grunt-html](https://www.npmjs.org/package/grunt-html), or [grunt-html-validation](https://www.npmjs.org/package/grunt-html-validation).
+Bootlint是一个工具，用来检查在页面中使用[Bootstrap](https://getbootstrap.com/)时一些常见的HTML错误。Vanilla Bootstrap的组件/小部件要求其部分DOM符合某些结构。Bootlint会检查Bootstrap组件实例的DOM结构是否正确，Bootstrap的最佳用法还要求您的页面包括特定的<meta>标记、HTML5 doctype声明等；Bootlint检查这些是否存在。
 
-Bootlint assumes that you are using Bootstrap's default class names in your webpage, as opposed to taking advantage of the "mixins" functionality of Less or Sass to map them to custom class names. If you are using mixins, Bootlint may report some false-positive warnings. However, there are some Bootlint checks that are applicable even if you are using mixins pervasively.
+### Caveats (注意事项)
 
-## Getting Started
+BooLink假设你的网页已经是有效的HTML5页面。如果您需要检查HTML5的有效性，我们推荐一些工具，比如[[`vnu.jar`](https://validator.github.io/validator/)，[grunt-html](https://www.npmjs.org/package/grunt-html)，或[grunt-html-validation](https://www.npmjs.org/package/grunt-html-validation)。
 
-### Via Grunt
+BootLink假设您在网页中使用Bootstrap的默认类名，而不是利用Less或Sass 的“mixins”功能将它们映射到自定义类名。如果你使用mixins，BooLink可以报告一些不正确警告。当然，即使您使用mixins，也有一些适用于BooLink检查的。
 
-To use Bootlint with [Grunt](https://gruntjs.com/), use the official Grunt plugin: [grunt-bootlint](https://github.com/twbs/grunt-bootlint).
+## 入门
 
-### Via Gulp
+### 通过Grunt
 
-If you want to use Bootlint with [Gulp](https://gulpjs.com/), there is an *unofficial* Gulp plugin: [gulp-bootlint](https://github.com/tschortsch/gulp-bootlint)
+通过[Grunt](https://gruntjs.com/)来使用Bootlint , 请使用官方Grunt插件: [grunt-bootlint](https://github.com/twbs/grunt-bootlint).
 
-### On the command line
+### 通过Gulp
 
-Install the module with: `npm install -g bootlint`
+如果你通过[Gulp](https://gulpjs.com/)来使用Bootlint, 有一个 *非官方* 的Gulp插件: [gulp-bootlint](https://github.com/tschortsch/gulp-bootlint)，当然我们需要使用定制的Gulp插件: [gulp-bootlint-customization](https://github.com/alex1221/gulp-bootlint-customization)
 
-Run it on some HTML files:
+### 在命令行中
+
+安装模块: `npm install -g bootlint-customization`
+
+在一些HTML文件上运行它:
 
 ```shell
 bootlint /path/to/some/webpage.html another_webpage.html [...]
 ```
 
-This will output the lint warnings applicable to each file.
+这将输出适用于每个文件的lint警告.
 
-The CLI also accepts a `--disable` (or `-d`) option to disable certain lint checks. `--disable` takes a comma-separated list of [lint problem IDs](https://github.com/twbs/bootlint/wiki). Here's an example:
+CLI还接受一个 `--disable` (or `-d`) 选项来禁用某些lint检查。 `--disable` 采用逗号分隔的[lint问题列表](https://github.com/alex1221/bootlint-customization/wiki). 下面是列子:
 
 ```shell
 bootlint -d W002,E020 /path/to/some/webpage.html another_webpage.html [...]
 ```
 
-The CLI will also process `stdin` input which means that you can pipe into Bootlint:
+CLI也将处理 `stdin` 输入，这意味着您可以pipe输入Bootlint:
 
 ```shell
 cat mypage.html | bootlint
 ```
 
-Or you could use a heredoc (mostly useful for quick testing):
+或者你可以使用heredoc语法（主要用于快速测试）:
 
 ```shell
 bootlint << EOF
@@ -62,101 +66,100 @@ bootlint << EOF
 EOF
 ```
 
-### In the browser
+### 在浏览器中
 
-Bootlint can run directly in the browser! This is accomplished by using a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet), which appends bootlint to the body of the active page. There are a few nice benefits of running bootlint directly in the browser. They include:
+Bootlint可以直接在浏览器中运行！这是通过[书签](https://en.wikipedia.org/wiki/Bookmarklet)来实现的，后者将bootlint附加到活动页面的主体。在浏览器中直接运行bootlint有几个好处。他们包括：
 
-1. Evaluating page markup after AJAX requests complete.
-2. Evaluating pages that are dynamically created server-side (ex: CMS).
-3. Evaluating pages/sites that do not have a build script.
+1. 在AJAX请求完成后检测页面结构。
+2. 检测动态创建的服务器端页面（例如：CMS）。
+3. 检测没有构建脚本的页面/网站。
 
-#### How to install the bookmarklet
+#### 怎么安装书签
 
-Please follow the instructions below to get up and running:
+请按照以下说明启动并运行：
 
-1. Create a new bookmark in your browser
-2. Set the name/title equal to something that is easy to remember. Ex: Run Bootlint
-3. Set the URL equal to
+1. 在浏览器中创建一个新书签
+2. 将名称/标题设置为易记的东西。例如：运行Bootlint
+3. 将网址设置为
 
 ```js
 javascript:(function(){var s=document.createElement("script");s.onload=function(){bootlint.showLintReportForCurrentDocument([]);};s.src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";document.body.appendChild(s)})();
 ```
+注意：上面的代码片段将确保您始终运行最新版本的bootlint。如果你想运行bootlint的特定版本，请参阅[BootstrapCDN](https://www.bootstrapcdn.com/bootlint/)。复制网址并更新 `s.src="PASTE-ME-HERE"`。
 
-Note: The snippet above will ensure you are always running the latest version of bootlint. If you want to reference a specific version of bootlint please see the [BootstrapCDN](https://www.bootstrapcdn.com/bootlint/). Copy the URL and update `s.src="PASTE-ME-HERE"`.
+#### 如何使用书签
 
-#### How to use the bookmarklet
+1. 点击您在上面创建的书签
+2. 将出现一个弹出窗口，通知您是否检测到问题
+3. 如果存在问题，请打开开发人员工具并选择控制台选项卡
 
-1. Click the bookmark you created above
-2. A popup will appear informing you if issues were detected
-3. If issues exist, please open the developer tools and select the console tab
+#### 备选方案
 
-#### Alternative Options
+##### 浏览器就绪脚本
 
-##### Browser ready script
+您可以手动下载[Bootlint浏览器就绪脚本](https://github.com/alex1221/bootlint-customization/blob/master/dist/browser/bootlint.js).
 
-You can manually download [the browser-ready version of Bootlint](https://github.com/twbs/bootlint/blob/master/dist/browser/bootlint.js).
+##### 第三方服务
 
-##### Third-party service
+BooLink还可以作为[bootlint.com](http://www.bootlint.com/)的非官方第三方Web服务，它只需输入一个URL，类似于[W3C标记验证服务](http://Valual.W3.org/)。**请注意** 我们*不*运行此服务，因为它可能使用一个过时的BooLink版本。因此，这不是推荐使用BooLink的方式。
 
-Bootlint is also available as a unofficial third-party web service at [bootlint.com](http://www.bootlint.com/) which lints your page simply by entering a URL, similar to the [W3C Markup Validation Service](https://validator.w3.org/). **Please note** that we do *not* operate this service and that it may use an outdated version of Bootlint. Therefore it is not the recommended way to use Bootlint.
+## Lint问题的解释
 
-## Lint problem explanations
+有关每个lint问题的详细说明, [请在我们的wiki中查找ID](https://github.com/alex1221/bootlint-customization/wiki) (例如：[`E001`](https://github.com/alex1221/bootlint-customization/wiki/E001) or [`W002`](https://github.com/alex1221/bootlint-customization/wiki/W002))。
 
-For detailed explanations of each lint problem, [look up the IDs](https://github.com/twbs/bootlint/wiki) (for example, [`E001`](https://github.com/twbs/bootlint/wiki/E001) or [`W002`](https://github.com/twbs/bootlint/wiki/W002)) in [our wiki](https://github.com/twbs/bootlint/wiki).
+## API文档
 
-## API Documentation
+Bootlint是[CommonJS模块](http://wiki.commonjs.org/wiki/Modules/1.1)。
 
-Bootlint is a [CommonJS module](http://wiki.commonjs.org/wiki/Modules/1.1).
-
-Bootlint represents the lint problems it reports using the `LintError` and `LintWarning` classes:
+Bootlint代表使用  `LintError` 和 `LintWarning` 类报告的lint问题：
 
 * `LintWarning`
-  * Represents a potential error. It may have false-positives.
-  * Constructor: `LintWarning(id, message, elements)`
-  * Properties:
-    * `id` - Unique string ID for this type of lint problem. Of the form "W###" (e.g. "W123").
-    * `message` - Human-readable string describing the problem
-    * `elements` - jQuery or Cheerio collection of referenced DOM elements pointing to all problem locations in the document
-      * (**Only available under Node.js**): When available from the underlying HTML parser (which is most of the time), the DOM elements in the collection will have a `.startLocation` property that is a `Location` (see below) indicating the location of the element in the document's HTML source
+  * 代表一个潜在的错误。它可能有误报。
+  * 构造函数: `LintWarning(id, message, elements)`
+  * 属性:
+    * `id` - 这种类型的lint问题的唯一字符串ID。形式为“W ###”（例如“W123”）
+    * `message` - 描述问题的字符串
+    * `elements` - 引用DOM元素的jQuery或Cheerio集合，指向文档中的所有问题位置
+      * (**仅在Node.js下可用**): 当从底层HTML分析器（大多数情况下）可用时, 集合中的DOM元素将有一个 `.startLocation` 属性，该属性是一个 `Location`(见下文)，指示文档HTML源中的元素的位置。
 * `LintError`
-  * Represents an error. Under the assumptions explained in the above "Caveats" section, it should never have any false-positives.
-  * Constructor: `LintError(id, message, elements)`
-  * Properties:
-    * `id` - Unique string ID for this type of lint problem. Of the form "E###" (e.g. "E123").
-    * `message` - Human-readable string describing the problem
-    * `elements` - jQuery or Cheerio collection of referenced DOM elements pointing to all problem locations in the document
-      * (**Only available under Node.js**): When available from the underlying HTML parser (which is most of the time), the DOM elements in the collection will have a `.startLocation` property that is a `Location` (see below) indicating the location of the element in the document's HTML source
+  * 代表错误。根据上述“注意事项”部分所述的假设，不应该有任何误报。
+  * 构造函数: `LintError(id, message, elements)`
+  * 属性:
+    * `id` - 这种类型的lint问题的唯一字符串ID。形式为“E ###”（例如“E123”）。
+    * `message` - 描述问题的字符串
+    * `elements` - 引用DOM元素的jQuery或Cheerio集合，指向文档中的所有问题位置
+      * (**仅在Node.js下可用**): 当从底层HTML分析器（大多数情况下）可用时, 集合中的DOM元素将有一个 `.startLocation` 属性，该属性是一个 `Location`(见下文)，指示文档HTML源中的元素的位置。
 
-Bootlint defines the following public utility class:
+Bootlint定义了以下公用类:
 
-* `Location` (**Only available under Node.js**)
-  * Represents a location in the HTML source
-  * Constructor: `Location(line, column)`
-  * Properties:
-    * `line` - 0-based line number
-    * `column` - 0-based column number
+* `Location` (**仅在Node.js下可用**)
+  * 代表HTML源代码中的一个位置
+  * 构造函数: `Location(line, column)`
+  * 属性:
+    * `line` - 基于0的行号
+    * `column` - 基于0的列号
 
-A ***reporter*** is a function that accepts exactly 1 argument of type `LintWarning` or `LintError`. Its return value is ignored. It should somehow record the problem or display it to the user.
+一个 ***reporter*** 是一个函数，它只接受一个参数 `LintWarning` 或 `LintError` 。它的返回值被忽略。它应该以某种方式记录问题或将其显示给用户。
 
-### Browser
+### 浏览器
 
-Bootlint exports a `bootlint` property on the global `window` object.
-In a browser environment, the following public APIs are available:
+Bootlint在 `window` 对象添加一个 `bootlint` 属性。
+在浏览器环境中，以下公共API可用：
 
-* `bootlint.lintCurrentDocument(reporter, disabledIds)`: Lints the HTML of the current document and calls the `reporter()` function repeatedly with each lint problem as an argument.
-  * `reporter` is a *reporter* function (see above for a definition). It will be called repeatedly with each lint problem as an argument.
-  * `disabledIds` is an array of string linter IDs to disable
-  * Returns nothing (i.e. `undefined`)
-* `bootlint.showLintReportForCurrentDocument(disabledIds, alertOpts)`: Lints the HTML of the current document and reports the linting results to the user. Each warning will be output individually using `console.warn()`.
-  * `disabledIds` is an array of string linter IDs to disable
-  * `alertOpts` is an optional options object with the following properties:
-    * `hasProblems` (type: `boolean`; default: `true`) - `window.alert()` a single general notification message to the user if there are any lint problems?
-    * `problemFree` (type: `boolean`; default: `true`) - `window.alert()` a notification message to the user if the document has no lint problems?
-  * Returns nothing (i.e. `undefined`)
+* `bootlint.lintCurrentDocument(reporter, disabledIds)`: Lints当前文档的HTML结构，并将每个lint出的问题作为参数回调给 `reporter()` 函数。
+  * `reporter` 是一个 *reporter* 函数 (见上面的定义). 它包含每个lint出的问题作为参数被回调
+  * `disabledIds` 是一个要禁用的 `linter id` 字符串数组
+  * 什么也没有返回 (即： `undefined`)
+* `bootlint.showLintReportForCurrentDocument(disabledIds, alertOpts)`: Lints当前文档的HTML结构并向用户输出结果。每个警告将分别使用 `console.warn()` 输出。.  
+  * `disabledIds` 是一个要禁用的 `linter id` 字符串数组
+  * `alertOpts` 是具有以下属性的可选选项对象:
+    * `hasProblems` (type: `boolean`; default: `true`) - `window.alert()` 如果有lint出任何问题，一个普通的通知消息给用户?
+    * `problemFree` (type: `boolean`; default: `true`) - `window.alert()` 如果没有lint问题，通知消息给用户?
+  * 什么也没有返回 (即： `undefined`)
 
 ### Node.js
 
-Example:
+例:
 
 ```js
 var bootlint = require('bootlint');
@@ -168,25 +171,25 @@ function reporter(lint) {
 bootlint.lintHtml("<!DOCTYPE html><html>...", reporter, []); // calls reporter() repeatedly with each lint problem as an argument
 ```
 
-In a Node.js environment, Bootlint exposes the following public API:
+在Node.js环境中，Bootlint公开以下公共API:
 
-* `bootlint.lintHtml(html, reporter, disabledIds)`: Lints the given HTML for a webpage and returns the linting results.
-  * `html` is the HTML to lint, as a string
-  * `reporter` is a *reporter* function (see above for a definition). It will be called repeatedly with each lint problem as an argument.
-  * `disabledIds` is an array of string linter IDs to disable
-  * Returns nothing (i.e. `undefined`)
+* `bootlint.lintHtml(html, reporter, disabledIds)`: Lints制定HTML页面并返回一个linting结果.
+  * `html` 字符串形式的HTMl链接
+  * `reporter` 是一个 *reporter* 函数 (见上面的定义). 它包含每个lint出的问题作为参数被回调
+  * `disabledIds` 是一个要禁用的 `linter id` 字符串数组
+  * 什么也没有返回 (即： `undefined`)
 
 ### HTTP API
 
-Bootlint can also be run as an HTTP server that exposes a very simple API. Use `npm run start` to run the server.
+Bootlint也可以在HTTP服务器运行，公开一些简单的API。使用 `npm run start` 运行服务。
 
-By default, it runs on port `7070`. Set the `$PORT` environment variable to change which port it uses.
+默认情况下，运行端口为 `7070`。设置 `$PORT` 环境变量可以更改它使用的端口。
 
-POST an HTML document to `/` and the document's lint problems will be returned as JSON.
+将HTML文档POST到 `/` ，文档的lint问题将作为JSON返回。
 
-The endpoint accepts an optional querystring argument named `disable`, whose value is a comma-separated list of linter IDs to disable.
+端点接受一个可选的列表字符串参数，名为 `disable` ，它的值是一个以逗号分隔的 `linter id` 列表表示禁用。
 
-Example:
+列:
 
 ```http
 Request:
@@ -213,13 +216,19 @@ Response:
   ]
 ```
 
-## Contributing
+## 特别说明
 
-The project's coding style is laid out in the ESLint configuration. Add unit tests for any new or changed functionality. Lint and test your code using the npm scripts..
+该项目的编码风格在ESLint配置中进行了规划。为任何新的或更改的功能添加单元测试。使用npm脚本测试你的代码
 
-_Also, please don't edit files in the "dist" subdirectory as they are generated via `npm run dist`. You'll find the source code in the "src" subdirectory!_
+_另外，请不要编辑“dist”子目录中的文件，因为它们是通过 `npm run dist` 生成的。你会在“src”子目录中找到源代码！_
 
-## Release History
+## 发布历史
+
+### bootlint-customization发布历史
+
+* 2018-05-25 - v1.0.0: 第一次发布。
+
+### bootlint发布历史
 
 See the [GitHub Releases page](https://github.com/twbs/bootlint/releases) for detailed changelogs.
 
