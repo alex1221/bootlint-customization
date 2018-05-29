@@ -18,7 +18,7 @@ Bootlint-Customization是在Bootlint的基础上做了一些定制的开发，�
 
 Bootlint是一个工具，用来检查在页面中使用[Bootstrap](https://getbootstrap.com/)时一些常见的HTML错误。Vanilla Bootstrap的组件/小部件要求其部分DOM符合某些结构。Bootlint会检查Bootstrap组件实例的DOM结构是否正确，Bootstrap的最佳用法还要求您的页面包括特定的<meta>标记、HTML5 doctype声明等；Bootlint检查这些是否存在。
 
-### Caveats (注意事项)
+### 注意事项
 
 BooLink假设你的网页已经是有效的HTML5页面。如果您需要检查HTML5的有效性，我们推荐一些工具，比如[[`vnu.jar`](https://validator.github.io/validator/)，[grunt-html](https://www.npmjs.org/package/grunt-html)，或[grunt-html-validation](https://www.npmjs.org/package/grunt-html-validation)。
 
