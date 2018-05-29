@@ -20,7 +20,7 @@ Bootlint是一个工具，用来检查在页面中使用[Bootstrap](https://getb
 
 ### 注意事项
 
-BooLink假设你的网页已经是有效的HTML5页面。如果您需要检查HTML5的有效性，我们推荐一些工具，比如[[`vnu.jar`](https://validator.github.io/validator/)，[grunt-html](https://www.npmjs.org/package/grunt-html)，或[grunt-html-validation](https://www.npmjs.org/package/grunt-html-validation)。
+BooLink假设你的网页已经是有效的HTML5页面。如果您需要检查HTML5的有效性，我们推荐一些工具，比如[`vnu.jar`](https://validator.github.io/validator/)，[grunt-html](https://www.npmjs.org/package/grunt-html)，或[grunt-html-validation](https://www.npmjs.org/package/grunt-html-validation)。
 
 BootLink假设您在网页中使用Bootstrap的默认类名，而不是利用Less或Sass 的“mixins”功能将它们映射到自定义类名。如果你使用mixins，BooLink可以报告一些不正确警告。当然，即使您使用mixins，也有一些适用于BooLink检查的。
 
